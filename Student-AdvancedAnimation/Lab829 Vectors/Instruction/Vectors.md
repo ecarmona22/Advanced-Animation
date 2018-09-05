@@ -73,6 +73,7 @@ If the x and y properties of your vector object represent the sides of the trian
  - The Sum of two vectors is the sum of their x and y properties:
 
 ![image](vec2.png)
+![image](vec4.png)
 
  - We could simple add the properties directly:  The code below will take the x and y values from one vector and add it to another
 
@@ -83,9 +84,24 @@ If the x and y properties of your vector object represent the sides of the trian
 
 			v1.add(v2);
 
+ - We may think of vector subtraction as adding opposites.
+
+			v1.x = v1.x + (-v2.x); //  same as v1.x = v1.x -v2.x;
+			v1.y = v1.y + (-v2.y); //  same as v1.y = v1.y -v2.y;
+
+![image](vec5.png)
+
+ - The difference of two vectors gives us a vector from the head of one to the head of another.  We will use this to steer on object to (or away from) another object.
+ 
  - Write the code for the **add()** and **sub()** methods in the **JSVector()**class
 
 
+##Part V: Remember some Trigonometry ##
+
+
+![image](vec8.png)
+
 ----
+
 
 

@@ -285,7 +285,8 @@ JSVector.prototype.getDirection = function(){
 <ul>
 <li>The Sum of two vectors is the sum of their x and y properties:</li>
 </ul>
-<p><img src="vec2.png" alt="image" /></p>
+<p><img src="vec2.png" alt="image" />
+<img src="vec4.png" alt="image" /></p>
 <ul>
 <li>
 <p>We could simple add the properties directly:  The code below will take the x and y values from one vector and add it to another</p>
@@ -301,9 +302,24 @@ JSVector.prototype.getDirection = function(){
 
 </li>
 <li>
+<p>We may think of vector subtraction as adding opposites.</p>
+<pre><code>    v1.x = v1.x + (-v2.x); //  same as v1.x = v1.x -v2.x;
+    v1.y = v1.y + (-v2.y); //  same as v1.y = v1.y -v2.y;
+</code></pre>
+
+</li>
+</ul>
+<p><img src="vec5.png" alt="image" /></p>
+<ul>
+<li>
+<p>The difference of two vectors gives us a vector from the head of one to the head of another.  We will use this to steer on object to (or away from) another object.</p>
+</li>
+<li>
 <p>Write the code for the <strong>add()</strong> and <strong>sub()</strong> methods in the <strong>JSVector()</strong>class</p>
 </li>
 </ul>
+<h2>Part V: Remember some Trigonometry</h2>
+<p><img src="vec8.png" alt="image" /></p>
 <hr />
 
 </body>
