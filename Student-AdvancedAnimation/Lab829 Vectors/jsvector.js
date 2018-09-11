@@ -53,7 +53,7 @@ JSVector.prototype.sub = function(v2){
 
 // Class method to return a new vector that is the sum of two vectors
 JSVector.addGetNew = function(v1,v2){
-   return new JSVector((v1.x+v2.x),(v1.y+v2.y);
+   return new JSVector((v1.x+v2.x),(v1.y+v2.y));
 }
 
 // Class method to return a new vector that is the difference of two vectors
