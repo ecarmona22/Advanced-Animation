@@ -16,8 +16,8 @@ function JSVector(x,y){
 // Set the magnitude of the vector,
 // retaining the angle (direction).
 JSVector.prototype.setMagnitude = function(mag){
-  this.y = mag * Math.sin(getDirection());
-  this.x = mag * Math.cos(getDirection());
+  this.y = mag * Math.sin(this.getDirection());
+  this.x = mag * Math.cos(this.getDirection());
 }
 
 // Get the magnitude of the vector using pythagorean theorem
@@ -28,8 +28,8 @@ JSVector.prototype.getMagnitude = function(){
 // Set the angle (direction) of the vector,
 // retaining the magnitude.
 JSVector.prototype.setDirection = function(angle){
-  this.y = getMagnitude()* Math.sin(angle);
-  this.x = getMagnitude()*Math.cos(angle);
+  this.y = this.getMagnitude()* Math.sin(angle);
+  this.x = this.getMagnitude()*Math.cos(angle);
 }
 
 // Get the direction (angle) of the vector
