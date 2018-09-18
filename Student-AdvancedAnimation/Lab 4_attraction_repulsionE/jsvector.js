@@ -16,8 +16,10 @@ function JSVector(x,y){
 // Set the magnitude of the vector,
 // retaining the angle (direction).
 JSVector.prototype.setMagnitude = function(mag){
-  this.y = mag * Math.sin(this.getDirection());
-  this.x = mag * Math.cos(this.getDirection());
+  var angle = this.getDirection();
+  this.y = mag * Math.sin(angle);
+  this.x = mag * Math.cos(angle);
+  return this;
 }
 
 // Get the magnitude of the vector using pythagorean theorem
@@ -28,8 +30,10 @@ JSVector.prototype.getMagnitude = function(){
 // Set the angle (direction) of the vector,
 // retaining the magnitude.
 JSVector.prototype.setDirection = function(angle){
-  this.y = this.getMagnitude()* Math.sin(angle);
-  this.x = this.getMagnitude()*Math.cos(angle);
+  var magnitude = this.getMagnitude();
+  this.y = magnitude * Math.sin(angle);
+  this.x = magnitude *Math.cos(angle);
+  return this;
 }
 
 // Get the direction (angle) of the vector
@@ -80,6 +84,7 @@ JSVector.prototype.divide = function(scalar){
 // Normalize this vector so that it has a magnitude of 1
 JSVector.prototype.normalize = function(){
   this.setMagnitude(1);
+  return this;
 }
 
 // Limit the magnitude of this vector
@@ -87,6 +92,7 @@ JSVector.prototype.limit = function(lim){
   if(this.getMagnitude()>lim){
     this.setMagnitude(lim);
   }
+  return this;
 }
 
 
@@ -110,6 +116,8 @@ JSVector.prototype.rotate = function(angle) {
 
   this.x = (placeHolderX * Math.cos(angle)) - (placeHolderY * Math.sin(angle));
   this.y = (placeHolderX * Math.sin(angle)) + (placeHolderY * Math.cos(angle));
+
+  return this;
 }
 
 
@@ -125,5 +133,7 @@ return new JSVector(this.x,this.y);
 
 // Override inherited toString() to describe this instance
 JSVector.prototype.toString = function() {
-  return "x position: "+this.x+" y position: " +this.y+" angle: "+this.getDirection()+ " magnitude: "+this.getMagnitude();
+  var angle = (this.getDirection()*180)/Math.PI;
+  return " x: "+this.x.toFixed(2)+",  y: " +
+  this.y.toFixed(2)+",  angle in degrees: "+ angle.toFixed(2) + ",  angle in Radians: " + this.getDirection().toFixed(2)+  ",  magnitude: "+this.getMagnitude().toFixed(2);
 }

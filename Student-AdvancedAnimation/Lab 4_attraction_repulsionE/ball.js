@@ -18,6 +18,21 @@ Ball.prototype.checkEdges = function(){
 }
 
 Ball.prototype.update = function(){
+  this.acc.x = 0;
+  this.acc.y = 0;
+  if (this!== ballAttractor){// code on actraction
+    if(this.loc.distance(ballAttractor.loc) < 400){
+      this.acc = JSVector.subGetNew(ballAttractor.loc,this.loc);
+      this.acc.normalize();
+      this.acc.multiply(.5);
+    }
+  if(this.loc.distance(ballAttractor.loc) < 100){// on repulsion
+      this.acc = JSVector.subGetNew(this.loc, ballAttractor.loc);
+      this.acc.normalize();
+      this.acc.multiply(.7);
+    }
+
+  }
   this.vel.x += this.acc.x;
   this.vel.y += this.acc.y;
   this.vel.limit(10);
