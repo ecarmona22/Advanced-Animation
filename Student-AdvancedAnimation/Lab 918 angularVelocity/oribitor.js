@@ -1,6 +1,6 @@
 function Orbitor(otherBall){
   this.otherBall = otherBall;
-  this.radiusOfOrbitor = 20;
+  this.radiusOfOrbitor = 15;
   this.radiusFromBall = new JSVector(70,0);
   this.angularVel = .05;
 
