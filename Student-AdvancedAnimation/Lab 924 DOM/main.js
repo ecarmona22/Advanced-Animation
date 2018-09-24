@@ -6,7 +6,6 @@ var canvas;
 var ctx;
 var balls = [];
 var ballAttractor;
-var orbitor;
 
 
 
@@ -21,7 +20,7 @@ function init(){
   // get the context
   ctx = canvas.getContext('2d'); // This is the context
   attactorBall(30);
-  orbitor = new Orbitor(ballAttractor);
+  Orbitor(ballAttractor);
   //makeBalls(1);
   animate();
 }
@@ -31,10 +30,10 @@ function animate(){
   requestAnimationFrame(animate);
   ctx.clearRect(0,0,window.innerWidth, window.innerHeight);
   ballAttractor.run();
-  orbitor.run();
+  Orbitor.run();
   }
 
-
+}
 
 function makeBalls(numBalls){
 

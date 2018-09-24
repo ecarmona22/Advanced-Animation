@@ -23,6 +23,12 @@ Ball.prototype.update = function(){
   this.vel.limit(10);
   this.loc.x += this.vel.x;
   this.loc.y += this.vel.y;
+  if (this!== ballAttractor){
+    this.loc.setMagnitude(1);
+    this.loc = JSVector.subGetNew(this.loc,ballAttractor.loc);
+    this.loc.rotate(.001);
+
+  }
   this.render();
 }
 
