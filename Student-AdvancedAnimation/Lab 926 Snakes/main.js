@@ -6,6 +6,7 @@ var canvas;
 var ctx;
 var balls = [];
 var leader;
+var snake;
 
 
 
@@ -17,11 +18,11 @@ function init(){
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   canvas.style.border = 'solid black 5px';
-  canvas.style.backgroundColor = 'rgba(12,15,25, .9)';
+  canvas.style.backgroundColor = 'rgba(0,0,0, .9)';
   // get the context
   ctx = canvas.getContext('2d'); // This is the context
-  attactorBall(30);
-
+  boid(30);
+  snake = new Snake(10);
 
   animate();
 }
@@ -30,8 +31,9 @@ function animate(){
 
   requestAnimationFrame(animate);
   ctx.clearRect(0,0,window.innerWidth, window.innerHeight);
-  ballAttractor.run();
-  orbitor.run();
+  leader.run();
+  snake.run();
+
   }
 
 
@@ -57,8 +59,8 @@ function boid(radius){ //boid ball
   var x = Math.random()*window.innerWidth;
   var y = Math.random()*window.innerHeight;
   var loc = new JSVector(x, y);
-  var dx = 1;
-  var dy = 1;
+  var dx = 3;
+  var dy = 3;
   var vel = new JSVector(dx, dy);
   var ax = 0;
   var ay = 0;
