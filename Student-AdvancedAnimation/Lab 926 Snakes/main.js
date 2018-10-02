@@ -4,10 +4,7 @@ window.onload = init;//  After the window has been loaded, go to init
 // global variables for canvas and context
 var canvas;
 var ctx;
-var balls = [];
-var leader;
-var snake;
-
+var snakes = [];
 
 
 
@@ -21,9 +18,8 @@ function init(){
   canvas.style.backgroundColor = 'rgba(0,0,0, .9)';
   // get the context
   ctx = canvas.getContext('2d'); // This is the context
-  boid(30);
-  snake = new Snake(10);
 
+  makeSnakes(5,8);
   animate();
 }
 
@@ -31,39 +27,15 @@ function animate(){
 
   requestAnimationFrame(animate);
   ctx.clearRect(0,0,window.innerWidth, window.innerHeight);
-  leader.run();
-  snake.run();
-
-  }
-
-
-
-function makeBalls(numBalls){
-
-  for(let i = 0; i < numBalls; i++){
-    var x = Math.random()*window.innerWidth;
-    var y = Math.random()*window.innerHeight;
-    var loc = new JSVector(x,y);
-    var dx = 0//Math.random()*10-5;//-constant velocity only changed by acceleration
-    var dy = 0//Math.random()*10-5;//-constant velocity only changed by acceleration
-    var vel = new JSVector(dx, dy);
-    var ax = 0;
-    var ay = 0;//Math.random()*10-5;
-    var acc = new JSVector(ax,ay);
-    var r = Math.random()*20 + 10;
-    balls.push(new Ball(loc, vel, acc, 15))
+  for(let i = 0;i<snakes.length;i++){
+    snakes[i].run();//updates snakes in array
   }
 }
 
-function boid(radius){ //boid ball
-  var x = Math.random()*window.innerWidth;
-  var y = Math.random()*window.innerHeight;
-  var loc = new JSVector(x, y);
-  var dx = 3;
-  var dy = 3;
-  var vel = new JSVector(dx, dy);
-  var ax = 0;
-  var ay = 0;
-  var acc = new JSVector(ax, ay);
-   leader = new Ball(loc, vel, acc, radius);
+
+function makeSnakes(numSnakes,numOfSeg){
+  for(let i = 0; i < numSnakes; i++){
+    snakes.push(new Snake(numOfSeg));//creates snake objects and pushes them into snakes array
+
+  }
 }
