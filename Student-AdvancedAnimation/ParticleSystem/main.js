@@ -5,8 +5,8 @@ window.onload = init;//  After the window has been loaded, go to init
 var canvas;
 var ctx;
 
-var particle;
-var particles = [];
+var spawn = new JSVector(window.innerWidth/2,50);
+var particles = [];// array of particles
 
 
 
@@ -20,7 +20,7 @@ function init(){
   canvas.style.backgroundColor = 'rgba(0,0,0, .9)';
   // get the context
   ctx = canvas.getContext('2d'); // This is the context
-  makeParicles(4);
+  makeParicles(40);
   animate();
 }
 
@@ -31,7 +31,8 @@ function animate(){
   for(let i = particles.length-1; i>= 0 ; i--){
     particles[i].run()
     if(particles[i].isDead() == true){
-      particles.splice(i);
+      particles.splice(i,1);
+      particles.push(new Particle());
     }
   }
 }
