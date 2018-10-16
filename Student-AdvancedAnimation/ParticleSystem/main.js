@@ -19,6 +19,8 @@ function init(){
   canvas.addEventListener("click", makeParticleSystem);
   // get the context
   ctx = canvas.getContext('2d'); // This is the context
+  //ctx.translate(window.innerWidth/2,window.innerHeight/2)
+  //ctx.rotate(Math.PI/2)
 
   animate();
 }

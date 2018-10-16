@@ -1,7 +1,7 @@
 function ParticleSystem(x, y){
 this.particles = [];
 this.spawn = new JSVector(x,y);
-this.color = color;
+this.color = getRandomColor();
 this.makeParticles();
 
 

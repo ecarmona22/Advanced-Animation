@@ -25,7 +25,7 @@ Particle.prototype.update = function () {
 
 Particle.prototype.render = function () {
   ctx.strokeStyle = 'rgba(0,0,0, .9)';
-  ctx.fillStyle = "rgba("+Math.random()*255+","+Math.random()*255+",255,"+Math.random()+")";
+  ctx.fillStyle = " "+this.color+"";
   ctx.fill();
   ctx.beginPath();
   ctx.arc(this.loc.x,this.loc.y, 10, Math.PI*2, 0, false);
