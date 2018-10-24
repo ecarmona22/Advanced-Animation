@@ -12,7 +12,7 @@ ParticleSystem.prototype.run = function () {
     this.particles[i].run()
     if(this.particles[i].isDead() == true){
       this.particles.splice(i,1);
-      this.particles.push(new Particle(this.spawn));
+      this.particles.push(new Particle(this.spawn,this.color));
     }
   }
 };
@@ -30,4 +30,4 @@ function getRandomColor() {
     color += letters[Math.floor(Math.random() * 16)];
   }
   return color;
-}//fixcolor change
+}

@@ -7,7 +7,7 @@ function Particle(spawn,color) {
   this.acc = new JSVector(0,.08);
   this.lifeSpan = (Math.random()*100)+300;
   this.isDead1 = false;
-  this.color = color
+  this.color = color;
 }
 
 
