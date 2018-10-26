@@ -128,7 +128,7 @@ JSVector.prototype.angleBetween = function(v2){
 
 // Make a copy of this vector
 JSVector.prototype.copy = function(){
-return new JSVector(this.x,this.y);
+  return new JSVector(this.x,this.y);
 }
 
 // Override inherited toString() to describe this instance
