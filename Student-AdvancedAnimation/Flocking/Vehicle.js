@@ -1,4 +1,4 @@
-function Vehicle(loc,){//file has not been added to index.html
+function Vehicle(loc){//file has not been added to index.html
   this.loc = loc;
   this.vel = new JSVector(0,0);
   this.acc = new JSVector(0,0);
