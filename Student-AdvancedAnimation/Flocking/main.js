@@ -15,7 +15,7 @@ function init(){
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
   canvas.style.border = 'solid black 5px';
-  canvas.style.backgroundColor = 'rgba(84,85,86, .9)';
+  canvas.style.backgroundColor = 'rgba(0,0,0, .9)';
   canvas.addEventListener("click", makeParticleSystem);
   // get the context
   ctx = canvas.getContext('2d'); // This is the context

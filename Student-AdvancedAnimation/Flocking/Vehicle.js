@@ -1,5 +1,5 @@
-function Vehicle(x,y){//file has not been added to index.html
-  this.loc = new JSVector(x,y);
+function Vehicle(loc,){//file has not been added to index.html
+  this.loc = loc;
   this.vel = new JSVector(0,0);
   this.acc = new JSVector(0,0);
   this.steerV;
@@ -113,7 +113,7 @@ Vehicle.prototype.align = function () {
 Vehicle.prototype.render = function () {
     ctx.save();
     ctx.strokeStyle = 'rgba(0,0,0, .9)';
-    ctx.fillStyle = " "+this.color+"";
+    ctx.fillStyle = "rgba(255,255,255,.9)";
     ctx.translate(this.loc.x,this.loc.y);
     ctx.rotate(this.vel.getDirection());
     ctx.beginPath();
