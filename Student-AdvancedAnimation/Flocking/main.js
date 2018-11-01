@@ -8,6 +8,7 @@ var flocking;
 var sepSlider;
 var coSlider;
 var alSlider;
+var sepValue;
 
 
 
@@ -45,6 +46,7 @@ function animate(){
 
 function handleSep(){
   console.log(this.value);
+  sepValue = this.value;
 }
 
 function handleCo(){

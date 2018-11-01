@@ -65,7 +65,7 @@ Vehicle.prototype.seperation = function() {
       desiredVel.multiply(this.maxSpeed);
       var desiredacc = JSVector.subGetNew(desiredVel,this.vel);
       desiredacc.normalize();
-      desiredacc.multiply(.03);//weight factor
+      desiredacc.multiply(sepValue);//weight factor
       sum.add(desiredacc);
     }
   }
