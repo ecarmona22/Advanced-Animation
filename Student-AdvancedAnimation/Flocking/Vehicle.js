@@ -21,10 +21,10 @@ Vehicle.prototype.run = function () {
 };
 
 Vehicle.prototype.checkedges = function () {
-    if(this.loc.x > window.innerWidth) this.loc.x = 0;
-    if(this.loc.x < 0) this.loc.x = window.innerWidth;
-    if(this.loc.y > window.innerHeight) this.loc.y = 0;
-    if(this.loc.y < 0) this.loc.y = window.innerHeight;
+    if(this.loc.x > canvas.width) this.loc.x = 0;
+    if(this.loc.x < 0) this.loc.x = canvas.width;
+    if(this.loc.y > canvas.height) this.loc.y = 0;
+    if(this.loc.y < 0) this.loc.y = canvas.height;
 
   this.update();
 };
@@ -65,7 +65,7 @@ Vehicle.prototype.seperation = function() {
       desiredVel.multiply(this.maxSpeed);
       var desiredacc = JSVector.subGetNew(desiredVel,this.vel);
       desiredacc.normalize();
-      desiredacc.multiply(.01);//weight factor
+      desiredacc.multiply(.03);//weight factor
       sum.add(desiredacc);
     }
   }
@@ -116,7 +116,7 @@ Vehicle.prototype.align = function () {
 Vehicle.prototype.render = function () {
     ctx.save();
     ctx.strokeStyle = 'rgba(0,0,0, .9)';
-    ctx.fillStyle = "rgba(255,255,255,.9)";
+    ctx.fillStyle = "rgba(140,138,138,.9)";
     ctx.translate(this.loc.x,this.loc.y);
     ctx.rotate(this.vel.getDirection());
     ctx.beginPath();

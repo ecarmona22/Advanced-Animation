@@ -17,6 +17,22 @@
   </head>
 
   <body>
-    <canvas id = "cnv"></canvas>
+    <canvas id = "cnv" height = "600" width="800" ></canvas>
+    <div class = "slider">
+      <label for="Separation">Separation</label>
+      <input type="range" id="sep" name="Separation"
+           min="0.0" max="2.0" step=".1"/>
+    </div>
+      <div class = "slider">
+
+        <label for="Cohesion">cohesion</label>
+        <input type="range" id="coh" name="Cohesion"
+                  min="0.0" max="2.0" step = ".1"/>
+      </div>
+      <div class = "slider">
+        <label for="Alignment">Alignment</label>
+        <input type="range" id="align" name="Alignment"
+                         min="0" max="2" step = ".1" />
+    </div>
   </body>
 </html>
