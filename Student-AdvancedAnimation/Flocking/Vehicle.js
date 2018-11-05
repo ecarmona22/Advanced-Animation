@@ -1,4 +1,4 @@
-function Vehicle(loc,neighbors){//file has not been added to index.html
+function Vehicle(loc,neighbors){
   this.loc = loc;
   this.vel = new JSVector(Math.random()*2-1, Math.random()*2-1);
   this.acc = new JSVector(0,0);
