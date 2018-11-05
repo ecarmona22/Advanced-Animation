@@ -73,11 +73,11 @@ Vehicle.prototype.seperation = function() {
 };
 
 
-Vehicle.prototype.cohesion = function () {
+Vehicle.prototype.cohesion = function () {// not working
   var sum = new JSVector(0,0);
   var count = 0;
   for(let i = 0;i<this.otherVehicles.lenght;i++){
-    var distanceFromNeighbor = this.loc.distance(this.otherVehicles[i].loc);
+    var distanceFromNeighbor = this.loc.distance(this.otherVehicles[i].loc);// undefined 
     if ((distanceFromNeighbor>0)&&(distanceFromNeighbor<this.radiusOfFreinds)) {
       sum.add(this.otherVehicles[i].loc);
       count++;
@@ -85,7 +85,14 @@ Vehicle.prototype.cohesion = function () {
   }
   if(count>0){
     sum.divide(count);
-    this.applyforce(this.steer(sum));
+    var desiredVel = JSVector.subGetNew(this.loc,sum);
+     desiredVel.normalize();
+     desiredVel.multiply(this.maxSpeed);
+     var desiredacc = JSVector.subGetNew(desiredVel,this.vel);
+     desiredacc.normalize();
+     desiredacc.multiply(coValue)
+     this.applyforce(desiredacc);
+  //this.applyforce(this.steer(sum));
   }else{
     this.applyforce(new JSVector(0,0));
   }

@@ -6,9 +6,13 @@ var canvas;
 var ctx;
 var flocking;
 var sepSlider;
+var sepValue =.03;// inital value of speration
 var coSlider;
+var coValue =.01// inital value of cohesion
 var alSlider;
-var sepValue;
+var alValue = .01;//inital value of alignment
+
+//cohesion not wokring 
 
 
 
