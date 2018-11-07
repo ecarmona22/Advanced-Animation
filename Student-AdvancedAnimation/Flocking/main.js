@@ -31,6 +31,7 @@ function init(){
   alValue = alSlider.value;
   radiusSlider = document.getElementById("radius");
   radiusSlider.addEventListener("input",handleRadius);
+  radiusValue= radiusSlider.value;
   canvas = document.getElementById('cnv');
 
   // Set the dimensions of the canvas

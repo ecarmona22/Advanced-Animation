@@ -5,7 +5,7 @@ function Vehicle(loc,neighbors){
   this.steerV;
   this.maxSpeed = 4;//book = 4
   this.maxForce = .1;//book = 0.1
-  this.radiusOfFreinds = 75;//radius for alignment, cohesion, and sepration
+  this.radiusOfFreinds = radiusValue;//radius for alignment, cohesion, and sepration
   this.otherVehicles = neighbors;
 
 }
@@ -77,8 +77,8 @@ Vehicle.prototype.cohesion = function () {// not working
   var sum = new JSVector(0,0);
   var count = 0;
   for(let i = 0;i<this.otherVehicles.length;i++){
-    var distanceFromNeighbor = this.loc.distance(this.otherVehicles[i].loc);// undefined
-    if ((distanceFromNeighbor>0)&&(distanceFromNeighbor<this.radiusOfFreinds)) {
+    var distanceFromNeighbor = this.loc.distance(this.otherVehicles[i].loc);
+    if ((distanceFromNeighbor>0) && (distanceFromNeighbor<this.radiusOfFreinds)) {
       sum.add(this.otherVehicles[i].loc);
       count++;
     }
