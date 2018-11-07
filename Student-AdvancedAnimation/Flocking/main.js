@@ -6,13 +6,14 @@ var canvas;
 var ctx;
 var flocking;
 var sepSlider;
-var sepValue =.03;// inital value of speration
+var sepValue;// inital value of speration
 var coSlider;
-var coValue =.01// inital value of cohesion
+var coValue;// inital value of cohesion
 var alSlider;
-var alValue = .01;//inital value of alignment
-
-//cohesion not wokring 
+var alValue ;//inital value of alignment
+var radiusSlider;
+var radiusValue;
+//cohesion not wokring
 
 
 
@@ -21,14 +22,17 @@ function init(){
   //get the canvas
   sepSlider = document.getElementById("sep");
   sepSlider.addEventListener("input",handleSep);
-
+  sepValue = sepSlider.value;
   coSlider = document.getElementById("coh");
   coSlider.addEventListener("input",handleCo);
-
+  coValue = coSlider.value;
   alSlider = document.getElementById("align");
   alSlider.addEventListener("input",handleAl);
-
+  alValue = alSlider.value;
+  radiusSlider = document.getElementById("radius");
+  radiusSlider.addEventListener("input",handleRadius);
   canvas = document.getElementById('cnv');
+
   // Set the dimensions of the canvas
 
   canvas.style.border = 'solid black 5px';
@@ -55,9 +59,15 @@ function handleSep(){
 
 function handleCo(){
   console.log(this.value);
-  //cohestion = this.value
+  coValue = this.value;
 }
 
 function handleAl(){
   console.log(this.value);
+  alValue = this.value;
+}
+
+function handleRadius(){
+    console.log(this.value);
+    radiusValue = this.value;
 }

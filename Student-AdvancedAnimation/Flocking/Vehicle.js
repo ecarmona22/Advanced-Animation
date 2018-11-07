@@ -76,8 +76,8 @@ Vehicle.prototype.seperation = function() {
 Vehicle.prototype.cohesion = function () {// not working
   var sum = new JSVector(0,0);
   var count = 0;
-  for(let i = 0;i<this.otherVehicles.lenght;i++){
-    var distanceFromNeighbor = this.loc.distance(this.otherVehicles[i].loc);// undefined 
+  for(let i = 0;i<this.otherVehicles.length;i++){
+    var distanceFromNeighbor = this.loc.distance(this.otherVehicles[i].loc);// undefined
     if ((distanceFromNeighbor>0)&&(distanceFromNeighbor<this.radiusOfFreinds)) {
       sum.add(this.otherVehicles[i].loc);
       count++;
@@ -90,7 +90,8 @@ Vehicle.prototype.cohesion = function () {// not working
      desiredVel.multiply(this.maxSpeed);
      var desiredacc = JSVector.subGetNew(desiredVel,this.vel);
      desiredacc.normalize();
-     desiredacc.multiply(coValue)
+     desiredacc.multiply(coValue);
+     desiredacc.limit(this.maxForce);
      this.applyforce(desiredacc);
   //this.applyforce(this.steer(sum));
   }else{
@@ -113,6 +114,8 @@ Vehicle.prototype.align = function () {
     sum.normalize();
     sum.multiply(this.maxSpeed);//weight
     var desiredacc = JSVector.subGetNew(sum,this.vel);
+    desiredacc.normalize();
+    desiredacc.multiply(alValue);
     desiredacc.limit(this.maxForce);
     this.applyforce(desiredacc);
   }else {
