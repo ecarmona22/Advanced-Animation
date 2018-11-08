@@ -6,11 +6,11 @@ var canvas;
 var ctx;
 var flocking;
 var sepSlider;
-var sepValue;// inital value of speration
+var sepValue;
 var coSlider;
-var coValue;// inital value of cohesion
+var coValue;
 var alSlider;
-var alValue ;//inital value of alignment
+var alValue;
 var radiusSlider;
 var radiusValue;
 //cohesion not wokring
