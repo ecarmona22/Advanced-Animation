@@ -13,6 +13,8 @@ var alSlider;
 var alValue;
 var radiusSlider;
 var radiusValue;
+var maxForceSlider;
+var maxForceValue;
 //cohesion not wokring
 
 
@@ -32,6 +34,9 @@ function init(){
   radiusSlider = document.getElementById("radius");
   radiusSlider.addEventListener("input",handleRadius);
   radiusValue= radiusSlider.value;
+  maxForceSlider = document.getElementById("maxForce");
+  maxForceSlider.addEventListener("input",handleMaxForce);
+  maxForceValue = maxForceSlider.value;
   canvas = document.getElementById('cnv');
 
   // Set the dimensions of the canvas
@@ -71,4 +76,8 @@ function handleAl(){
 function handleRadius(){
     console.log(this.value);
     radiusValue = this.value;
+}
+function handleMaxForce(){
+  console.log(this.value);
+  maxForceValue = this.value;
 }
