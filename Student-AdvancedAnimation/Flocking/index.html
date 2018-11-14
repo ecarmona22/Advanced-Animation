@@ -21,7 +21,13 @@
     <div class = "slider">
       <label for="Separation">Separation</label>
       <input type="range" id="sep" name="Separation"
-           min="0.0" max=".1" step=".01"/>
+           min="0.0" max=".2" step=".01"/>
+    </div>
+
+    <div class = "slider">
+      <label for="Separation">Separation radius</label>
+      <input type="range" id="sepRadius" name="Separation"
+           min="0.0" max="100" step="5"/>
     </div>
       <div class = "slider">
 
@@ -35,14 +41,19 @@
                          min="0" max=".1" step = ".01" />
     </div>
     <div class = "slider">
-      <label for="radius">Radius</label>
+      <label for="radius">Radius for cohesion and alignment</label>
       <input type="range" id="radius" name="radius"
-                       min="0" max="100" step = "5" />
+                       min="100" max="300" step = "5" />
   </div>
   <div class = "slider">
     <label for="maxForce">MaxForce</label>
     <input type="range" id="maxForce" name="MaxForce"
-                     min="0" max="10" step = "1" />
-</div>
+                     min="0" max=".2" step = ".01" />
+    </div>
+    <div class = "slider">
+      <label for="maxSpeed">MaxSpeed</label>
+      <input type="range" id="maxspeed" name="maxspeed"
+                       min="0" max="10" step = "1" />
+    </div>
   </body>
 </html>

@@ -3,8 +3,8 @@ function Vehicle(loc,neighbors){
   this.vel = new JSVector(Math.random()*2-1, Math.random()*2-1);
   this.acc = new JSVector(0,0);
   this.steerV;
-  this.maxSpeed = 4;//book = 4
-  this.maxForce = .1;//book = 0.1
+  this.maxSpeed = maxSpeedValue;//book = 4
+  this.maxForce = maxForceValue;//book = 0.1
   this.radiusOfFreinds = radiusValue;//radius for alignment, cohesion, and sepration
   this.otherVehicles = neighbors;
 
@@ -58,8 +58,9 @@ Vehicle.prototype.steer = function (target) {
 Vehicle.prototype.seperation = function() {
   var sum = new JSVector(0,0);
   for(let i = 0;i<this.otherVehicles.length;i++){//looks for vehicles that are close
+    if(this.otherVehicles[i] === this) continue;
     var distanceFromNeighbor = this.loc.distance(this.otherVehicles[i].loc);
-    if((distanceFromNeighbor>0)&&(distanceFromNeighbor<this.radiusOfFreinds)){
+    if(distanceFromNeighbor<50){
       var desiredVel = JSVector.subGetNew(this.loc,this.otherVehicles[i].loc);
       desiredVel.normalize();
       desiredVel.multiply(this.maxSpeed);
@@ -77,15 +78,17 @@ Vehicle.prototype.cohesion = function () {// not working
   var sum = new JSVector(0,0);
   var count = 0;
   for(let i = 0;i<this.otherVehicles.length;i++){
-    var distanceFromNeighbor = this.loc.distance(this.otherVehicles[i].loc);
-    if ((distanceFromNeighbor>0) && (distanceFromNeighbor<this.radiusOfFreinds)) {
-      sum.add(this.otherVehicles[i].loc);
-      count++;
+    if(this.otherVehicles[i] != this){
+      var distanceFromNeighbor = this.loc.distance(this.otherVehicles[i].loc);
+      if(distanceFromNeighbor<this.radiusOfFreinds) {
+        sum.add(this.otherVehicles[i].loc);
+        count++;
+      }
     }
   }
   if(count>0){
     sum.divide(count);
-    var desiredVel = JSVector.subGetNew(this.loc,sum);
+    var desiredVel = JSVector.subGetNew(sum,this.loc);
      desiredVel.normalize();
      desiredVel.multiply(this.maxSpeed);
      var desiredacc = JSVector.subGetNew(desiredVel,this.vel);

@@ -7,6 +7,8 @@ var ctx;
 var flocking;
 var sepSlider;
 var sepValue;
+var sepRadiusSlider;
+var sepRadiusValue;//needs to be finsihed
 var coSlider;
 var coValue;
 var alSlider;
@@ -15,7 +17,9 @@ var radiusSlider;
 var radiusValue;
 var maxForceSlider;
 var maxForceValue;
-//cohesion not wokring
+var maxSpeedSlider;
+var maxSpeedValue;
+
 
 
 
@@ -25,6 +29,8 @@ function init(){
   sepSlider = document.getElementById("sep");
   sepSlider.addEventListener("input",handleSep);
   sepValue = sepSlider.value;
+  sepRadiusSlider = document.getElementById("sepRadius");
+  sepRadiusSlider.addEventListener("input",)///fix up slider
   coSlider = document.getElementById("coh");
   coSlider.addEventListener("input",handleCo);
   coValue = coSlider.value;
@@ -38,6 +44,9 @@ function init(){
   maxForceSlider.addEventListener("input",handleMaxForce);
   maxForceValue = maxForceSlider.value;
   canvas = document.getElementById('cnv');
+  maxSpeedSlider = document.getElementById('maxspeed');
+  maxSpeedSlider.addEventListener('input',handleMaxSpeed);
+  maxSpeedValue = maxSpeedSlider.value;
 
   // Set the dimensions of the canvas
 
@@ -80,4 +89,8 @@ function handleRadius(){
 function handleMaxForce(){
   console.log(this.value);
   maxForceValue = this.value;
+}
+function handleMaxSpeed(){
+  console.log(this.value);
+  maxSpeedValue = this.value;
 }
