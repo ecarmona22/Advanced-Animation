@@ -21,10 +21,36 @@ Vehicle.prototype.run = function () {
 };
 
 Vehicle.prototype.checkedges = function () {
-    if(this.loc.x > canvas.width) this.loc.x = 0;
-    if(this.loc.x < 0) this.loc.x = canvas.width;
-    if(this.loc.y > canvas.height) this.loc.y = 0;
-    if(this.loc.y < 0) this.loc.y = canvas.height;
+    if(this.loc.x > canvas.width-75) {
+      var temp = new JSVector(1,0);
+      temp.setMagnitude(maxSpeedValue);
+      var desiredacc = JSVector.subGetNew(this.vel,temp);
+      desiredacc.multiply(((canvas.width-this.loc.x)/75)*.2);
+      this.applyforce(desiredacc);
+    }
+
+    if(this.loc.x < 75) {
+      var temp = new JSVector(-1,0);
+      temp.setMagnitude(maxSpeedValue);
+      var desiredacc = JSVector.subGetNew(this.vel,temp);
+      desiredacc.multiply(((75-this.loc.x)/75)*.2);
+      this.applyforce(desiredacc);
+    }
+
+    if(this.loc.y > canvas.height-75){
+      var temp = new JSVector(0,1);
+      temp.setMagnitude(maxSpeedValue);
+      var desiredacc = JSVector.subGetNew(this.vel,temp);
+      desiredacc.multiply(((canvas.height-this.loc.y)/75)*.2);
+      this.applyforce(desiredacc);
+    }
+    if(this.loc.y < 75){
+      var temp = new JSVector(0,-1);
+      temp.setMagnitude(maxSpeedValue);
+      var desiredacc = JSVector.subGetNew(this.vel,temp);
+      desiredacc.multiply(((75 -this.loc.y)/75)*.2);
+      this.applyforce(desiredacc);
+    }
 
   this.update();
 };
@@ -60,7 +86,7 @@ Vehicle.prototype.seperation = function() {
   for(let i = 0;i<this.otherVehicles.length;i++){//looks for vehicles that are close
     if(this.otherVehicles[i] === this) continue;
     var distanceFromNeighbor = this.loc.distance(this.otherVehicles[i].loc);
-    if(distanceFromNeighbor<50){
+    if(distanceFromNeighbor<sepRadiusValue){
       var desiredVel = JSVector.subGetNew(this.loc,this.otherVehicles[i].loc);
       desiredVel.normalize();
       desiredVel.multiply(this.maxSpeed);
