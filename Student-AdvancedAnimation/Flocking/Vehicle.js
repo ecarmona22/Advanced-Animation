@@ -60,7 +60,7 @@ Vehicle.prototype.seperation = function() {
   for(let i = 0;i<this.otherVehicles.length;i++){//looks for vehicles that are close
     if(this.otherVehicles[i] === this) continue;
     var distanceFromNeighbor = this.loc.distance(this.otherVehicles[i].loc);
-    if(distanceFromNeighbor<50){
+    if(distanceFromNeighbor< sepRadiusValue){
       var desiredVel = JSVector.subGetNew(this.loc,this.otherVehicles[i].loc);
       desiredVel.normalize();
       desiredVel.multiply(this.maxSpeed);
@@ -128,8 +128,8 @@ Vehicle.prototype.align = function () {
 
 Vehicle.prototype.render = function () {
     ctx.save();
-    ctx.strokeStyle = 'rgba(0,0,0, .9)';
-    ctx.fillStyle = "rgba(140,138,138,.9)";
+    ctx.strokeStyle = 'rgba(0,0,0, .1)';
+    ctx.fillStyle = "rgba(129, 13, 224, .9)";
     ctx.translate(this.loc.x,this.loc.y);
     ctx.rotate(this.vel.getDirection());
     ctx.beginPath();

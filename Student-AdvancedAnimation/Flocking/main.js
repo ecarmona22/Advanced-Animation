@@ -30,7 +30,8 @@ function init(){
   sepSlider.addEventListener("input",handleSep);
   sepValue = sepSlider.value;
   sepRadiusSlider = document.getElementById("sepRadius");
-  sepRadiusSlider.addEventListener("input",)///fix up slider
+  sepRadiusSlider.addEventListener("input",handleSepRadius);
+  sepRadiusValue = sepRadiusSlider.value;
   coSlider = document.getElementById("coh");
   coSlider.addEventListener("input",handleCo);
   coValue = coSlider.value;
@@ -51,7 +52,7 @@ function init(){
   // Set the dimensions of the canvas
 
   canvas.style.border = 'solid black 5px';
-  canvas.style.backgroundColor = 'rgba(250,250,250, .8)';
+  canvas.style.backgroundColor = 'rgba(9, 181, 43, .8)';
   //canvas.addEventListener("click", makeVehicles);
   // get the context
   ctx = canvas.getContext('2d'); // This is the context
@@ -93,4 +94,8 @@ function handleMaxForce(){
 function handleMaxSpeed(){
   console.log(this.value);
   maxSpeedValue = this.value;
+}
+function handleSepRadius(){
+  console.log(this.value);
+  sepRadiusValue = this.value;
 }
