@@ -3,13 +3,13 @@ function Vehicle(loc,neighbors){
   this.vel = new JSVector(Math.random()*2-1, Math.random()*2-1);
   this.acc = new JSVector(0,0);
   this.steerV;
-  this.maxSpeed =6 // maxSpeedValue;//book = 4
+  this.maxSpeed =4 // maxSpeedValue;//book = 4
   this.maxForce = 0.4 //maxForceValue;//book = 0.1
   //this.radiusOfFreinds = radiusValue;//radius for alignment, cohesion, and sepration
   this.otherVehicles = neighbors;
   this.seperationRadius = 60;
-  this.seperationFactor = .06;
-  this.cohesionFactor =.02;
+  this.seperationFactor = .09;
+  this.cohesionFactor =.01;
   this.alignmentFactor = .03;
   this.radiusOfAlAndCo = 210;
 
@@ -62,7 +62,7 @@ Vehicle.prototype.checkedges = function () {
 
 Vehicle.prototype.update = function () {
   this.vel.add(this.acc);
-  this.vel.limit(this.maxForce);
+  this.vel.limit(this.maxSpeed);
   this.loc.add(this.vel);
   this.acc.multiply(0);
   this.seperation();
