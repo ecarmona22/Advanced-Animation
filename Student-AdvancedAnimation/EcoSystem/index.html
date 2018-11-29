@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JS Pa</title>
+    <meta charset = "utf-8">
+    <link rel="stylesheet" type="text/css" href="mystyles.css">
+    <script src="ball.js"></script>
+    <script src="jsvector.js"></script>
+    <script src="oribitor.js"></script>
+    <script src="snake.js"></script>
+    <script src="particleClass.js"></script>
+    <script src="ParticleSystemClass.js"></script>
+    <script src="Vehicle.js"></script>
+    <script src="flockClass.js"></script>
+    <script src="main.js"></script>
+
+  </head>
+
+  <body>
+    <canvas id = "cnv" height = "800" width="1200" ></canvas>
+    <div class = "slider">
+      <label for="Separation">Separation</label>
+      <input type="range" id="sep" name="Separation"
+           min="0.0" max=".2" step=".01"/>
+    </div>
+
+    <div class = "slider">
+      <label for="Separation">Separation radius</label>
+      <input type="range" id="sepRadius" name="Separation"
+           min="0.0" max="100" step="5"/>
+    </div>
+      <div class = "slider">
+
+        <label for="Cohesion">cohesion</label>
+        <input type="range" id="coh" name="Cohesion"
+                  min="0.0" max=".1" step = ".01"/>
+      </div>
+      <div class = "slider">
+        <label for="Alignment">Alignment</label>
+        <input type="range" id="align" name="Alignment"
+                         min="0" max=".1" step = ".01" />
+    </div>
+    <div class = "slider">
+      <label for="radius">Radius for cohesion and alignment</label>
+      <input type="range" id="radius" name="radius"
+                       min="100" max="300" step = "5" />
+  </div>
+  <div class = "slider">
+    <label for="maxForce">MaxForce</label>
+    <input type="range" id="maxForce" name="MaxForce"
+                     min="0" max=".2" step = ".01" />
+    </div>
+    <div class = "slider">
+      <label for="maxSpeed">MaxSpeed</label>
+      <input type="range" id="maxspeed" name="maxspeed"
+                       min="0" max="10" step = "1" />
+    <div class = "slider">
+       <label for="maxForce">MaxForce</label>
+       <input type="range" id="maxForce" name="MaxForce"
+                                          min="0" max=".2" step = ".01" />
+        </div>
+    </div>
+  </body>
+</html>
