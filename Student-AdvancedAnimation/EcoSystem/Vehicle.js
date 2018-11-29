@@ -8,8 +8,8 @@ function Vehicle(loc,neighbors){
   //this.radiusOfFreinds = radiusValue;//radius for alignment, cohesion, and sepration
   this.otherVehicles = neighbors;
   this.seperationRadius = 60;
-  this.seperationFactor = .09;
-  this.cohesionFactor =.01;
+  this.seperationFactor = .05;
+  this.cohesionFactor =.02;
   this.alignmentFactor = .03;
   this.radiusOfAlAndCo = 210;
 
@@ -26,36 +26,11 @@ Vehicle.prototype.run = function () {
 };
 
 Vehicle.prototype.checkedges = function () {
-    if(this.loc.x > canvas.width-75) {
-      var temp = new JSVector(1,0);
-      temp.setMagnitude(this.maxSpeed);//(maxSpeedValue);
-      var desiredacc = JSVector.subGetNew(this.vel,temp);
-      desiredacc.multiply(((canvas.width-this.loc.x)/75)*.2);
-      this.applyforce(desiredacc);
-    }
+    if(this.loc.x > canvas.width) this.loc.x = 0;
+    if(this.loc.x < 0) this.loc.x = canvas.width;
+    if(this.loc.y > canvas.height) this.loc.y = 0;
+    if(this.loc.y <0) this.loc.y = canvas.height;
 
-    if(this.loc.x < 75) {
-      var temp = new JSVector(-1,0);
-      temp.setMagnitude(this.maxSpeed);//(maxSpeedValue);
-      var desiredacc = JSVector.subGetNew(this.vel,temp);
-      desiredacc.multiply(((75-this.loc.x)/75)*.2);
-      this.applyforce(desiredacc);
-    }
-
-    if(this.loc.y > canvas.height-75){
-      var temp = new JSVector(0,1);
-      temp.setMagnitude(this.maxSpeed);//(maxSpeedValue);
-      var desiredacc = JSVector.subGetNew(this.vel,temp);
-      desiredacc.multiply(((canvas.height-this.loc.y)/75)*.2);
-      this.applyforce(desiredacc);
-    }
-    if(this.loc.y < 75){
-      var temp = new JSVector(0,-1);
-      temp.setMagnitude(this.maxSpeed);//(maxSpeedValue);
-      var desiredacc = JSVector.subGetNew(this.vel,temp);
-      desiredacc.multiply(((75 -this.loc.y)/75)*.2);
-      this.applyforce(desiredacc);
-    }
 
   this.update();
 };
@@ -91,13 +66,13 @@ Vehicle.prototype.seperation = function() {
   for(let i = 0;i<this.otherVehicles.length;i++){//looks for vehicles that are close
     if(this.otherVehicles[i] === this) continue;
     var distanceFromNeighbor = this.loc.distance(this.otherVehicles[i].loc);
-    if(distanceFromNeighbor< this.seperatonRadius){
+    if(distanceFromNeighbor< this.seperationRadius){
       var desiredVel = JSVector.subGetNew(this.loc,this.otherVehicles[i].loc);
       desiredVel.normalize();
       desiredVel.multiply(this.maxSpeed);
       var desiredacc = JSVector.subGetNew(desiredVel,this.vel);
       desiredacc.normalize();
-      desiredacc.multiply(seperationFactor);//sepValue);//weight factor
+      desiredacc.multiply(this.seperationFactor);//sepValue);//weight factor
       sum.add(desiredacc);
     }
   }
@@ -160,7 +135,7 @@ Vehicle.prototype.align = function () {
 Vehicle.prototype.render = function () {
     ctx.save();
     ctx.strokeStyle = 'rgba(0,0,0, .1)';
-    ctx.fillStyle = "rgba(129, 13, 224, .9)";
+    ctx.fillStyle = "rgba(22, 21, 21, .9)";
     ctx.translate(this.loc.x,this.loc.y);
     ctx.rotate(this.vel.getDirection());
     ctx.beginPath();

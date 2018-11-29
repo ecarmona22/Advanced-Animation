@@ -1,6 +1,6 @@
 function Flocking(){
   this.vehicles = [];
-  this.amountOfVehicles = 20;
+  this.amountOfVehicles = 50;
 
   this.makeVehicles();
 }
