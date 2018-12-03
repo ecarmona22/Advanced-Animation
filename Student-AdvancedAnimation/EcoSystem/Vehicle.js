@@ -1,14 +1,16 @@
-function Vehicle(loc,neighbors){
+function Vehicle(loc,neighbors,otherCreatures){
   this.loc = loc;
   this.vel = new JSVector(Math.random()*2-1, Math.random()*2-1);
   this.acc = new JSVector(0,0);
   this.steerV;
-  this.maxSpeed =6 // maxSpeedValue;//book = 4
+  this.maxSpeed =4 // maxSpeedValue;//book = 4
   this.maxForce = 0.4 //maxForceValue;//book = 0.1
   //this.radiusOfFreinds = radiusValue;//radius for alignment, cohesion, and sepration
   this.otherVehicles = neighbors;
+  this.creatures = otherCreatures;
+  this.distanceFromSnakes = 50;
   this.seperationRadius = 60;
-  this.seperationFactor = .06;
+  this.seperationFactor = .05;
   this.cohesionFactor =.02;
   this.alignmentFactor = .03;
   this.radiusOfAlAndCo = 210;
@@ -26,48 +28,24 @@ Vehicle.prototype.run = function () {
 };
 
 Vehicle.prototype.checkedges = function () {
-    if(this.loc.x > canvas.width-75) {
-      var temp = new JSVector(1,0);
-      temp.setMagnitude(this.maxSpeed);//(maxSpeedValue);
-      var desiredacc = JSVector.subGetNew(this.vel,temp);
-      desiredacc.multiply(((canvas.width-this.loc.x)/75)*.2);
-      this.applyforce(desiredacc);
-    }
+    if(this.loc.x > canvas.width) this.loc.x = 0;
+    if(this.loc.x < 0) this.loc.x = canvas.width;
+    if(this.loc.y > canvas.height) this.loc.y = 0;
+    if(this.loc.y <0) this.loc.y = canvas.height;
 
-    if(this.loc.x < 75) {
-      var temp = new JSVector(-1,0);
-      temp.setMagnitude(this.maxSpeed);//(maxSpeedValue);
-      var desiredacc = JSVector.subGetNew(this.vel,temp);
-      desiredacc.multiply(((75-this.loc.x)/75)*.2);
-      this.applyforce(desiredacc);
-    }
-
-    if(this.loc.y > canvas.height-75){
-      var temp = new JSVector(0,1);
-      temp.setMagnitude(this.maxSpeed);//(maxSpeedValue);
-      var desiredacc = JSVector.subGetNew(this.vel,temp);
-      desiredacc.multiply(((canvas.height-this.loc.y)/75)*.2);
-      this.applyforce(desiredacc);
-    }
-    if(this.loc.y < 75){
-      var temp = new JSVector(0,-1);
-      temp.setMagnitude(this.maxSpeed);//(maxSpeedValue);
-      var desiredacc = JSVector.subGetNew(this.vel,temp);
-      desiredacc.multiply(((75 -this.loc.y)/75)*.2);
-      this.applyforce(desiredacc);
-    }
 
   this.update();
 };
 
 Vehicle.prototype.update = function () {
   this.vel.add(this.acc);
-  this.vel.limit(this.maxForce);
+  this.vel.limit(this.maxSpeed);
   this.loc.add(this.vel);
   this.acc.multiply(0);
   this.seperation();
   this.cohesion();
   this.align();
+  this.otherCreatures();
   this.render();
 
 };
@@ -91,21 +69,37 @@ Vehicle.prototype.seperation = function() {
   for(let i = 0;i<this.otherVehicles.length;i++){//looks for vehicles that are close
     if(this.otherVehicles[i] === this) continue;
     var distanceFromNeighbor = this.loc.distance(this.otherVehicles[i].loc);
-    if(distanceFromNeighbor< this.seperatonRadius){
+    if(distanceFromNeighbor< this.seperationRadius){
       var desiredVel = JSVector.subGetNew(this.loc,this.otherVehicles[i].loc);
       desiredVel.normalize();
       desiredVel.multiply(this.maxSpeed);
       var desiredacc = JSVector.subGetNew(desiredVel,this.vel);
       desiredacc.normalize();
-      desiredacc.multiply(seperationFactor);//sepValue);//weight factor
+      desiredacc.multiply(this.seperationFactor);//sepValue);//weight factor
       sum.add(desiredacc);
     }
   }
   this.applyforce(sum);
 };
 
+Vehicle.prototype.otherCreatures = function () {
+  var sum = new JSVector(0,0);
+  for(let i = 0; i<this.creatures.length;i++){
+    var distanceFromCreature = this.loc.distance(this.creatures[i].loc);
+    if(distanceFromCreature<this.distanceFromSnakes){
+      var desiredVel = JSVector.subGetNew(this.loc,this.creatures[i].loc);
+      desiredVel.normalize();
+      desiredVel.multiply(this.maxSpeed);
+      var desiredacc = JSVector.subGetNew(desiredVel,this.vel);
 
-Vehicle.prototype.cohesion = function () {// not working
+      sum.add(desiredacc);
+    }
+  }
+
+  this.applyforce(sum);
+};
+
+Vehicle.prototype.cohesion = function () {
   var sum = new JSVector(0,0);
   var count = 0;
   for(let i = 0;i<this.otherVehicles.length;i++){
@@ -160,7 +154,7 @@ Vehicle.prototype.align = function () {
 Vehicle.prototype.render = function () {
     ctx.save();
     ctx.strokeStyle = 'rgba(0,0,0, .1)';
-    ctx.fillStyle = "rgba(129, 13, 224, .9)";
+    ctx.fillStyle = "rgba(255, 255, 255, .9)";
     ctx.translate(this.loc.x,this.loc.y);
     ctx.rotate(this.vel.getDirection());
     ctx.beginPath();

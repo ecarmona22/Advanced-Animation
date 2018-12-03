@@ -1,14 +1,16 @@
 function Snake(numOfSeg){
   this.loc = new JSVector( Math.random()*window.innerWidth, Math.random()*window.innerHeight);
-  this.vel = new JSVector(Math.random()*5,Math.random()*5);
-  this.acc = new JSVector(0.02,-0.02);
+  this.vel = new JSVector(Math.random()*4,Math.random()*4);
+  this.acc = new JSVector(0.01,-0.01);
   this.accR = Math.random()*300;//variable will create change in acceleration
 
   this.numOfSeg = numOfSeg;
   this.segments = [];// array of segments
   this.distance = 20;
   this.radiusOfSeg = 10;
-  this.segments.push(this.loc);// first segment given location
+  this.segments.push(this.loc);
+  this.generator = new Simple1DNoise();
+  this.x = 1;// first segment given location
   for(let i = 0;i<numOfSeg-1;i++){
     this.segments.push(new JSVector(0,0));
   }
@@ -23,8 +25,8 @@ Snake.prototype.run = function () {
 }
 
 Snake.prototype.checkEdges = function () {
-  if(this.loc.x > window.innerWidth || this.loc.x < 0)  this.vel.x = -this.vel.x;
-  if(this.loc.y > window.innerHeight || this.loc.y < 0)  this.vel.y = -this.vel.y;
+  if(this.loc.x > canvas.width || this.loc.x < 0)  this.vel.x = -this.vel.x;
+  if(this.loc.y > canvas.height || this.loc.y < 0)  this.vel.y = -this.vel.y;
 }
 
 
@@ -53,9 +55,9 @@ Snake.prototype.update = function () {
 
 Snake.prototype.render = function () {
   for(let i = 0;i<this.numOfSeg;i++){
-    ctx.strokeStyle = 'rgba(155,155,'+ Math.random()*255+',.2)';
+    ctx.strokeStyle = 'rgba('+this.generator.getVal(this.x)*255+',0,0,.5)';
     ctx.lineWidth = 22;
-    ctx.fillStyle = 'rgba('+ Math.random()*250+','+ this.loc.x +','+this.loc.y+')';
+    ctx.fillStyle = 'rgba('+ this.generator.getVal(this.x)*250+','+ this.loc.x +','+this.loc.y+')';
     ctx.beginPath();
     ctx.arc(this.segments[i].x,this.segments[i].y, this.radiusOfSeg-i, Math.PI*2, 0, false);
     ctx.stroke();
@@ -63,4 +65,5 @@ Snake.prototype.render = function () {
 
 
   }
+  this.x+=0.01;
 }
