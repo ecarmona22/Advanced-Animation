@@ -1,4 +1,4 @@
-function Vehicle(loc,neighbors){
+function Vehicle(loc,neighbors,otherCreatures){
   this.loc = loc;
   this.vel = new JSVector(Math.random()*2-1, Math.random()*2-1);
   this.acc = new JSVector(0,0);
@@ -7,6 +7,8 @@ function Vehicle(loc,neighbors){
   this.maxForce = 0.4 //maxForceValue;//book = 0.1
   //this.radiusOfFreinds = radiusValue;//radius for alignment, cohesion, and sepration
   this.otherVehicles = neighbors;
+  this.creatures = otherCreatures;
+  this.distanceFromSnakes = 50;
   this.seperationRadius = 60;
   this.seperationFactor = .05;
   this.cohesionFactor =.02;
@@ -43,6 +45,7 @@ Vehicle.prototype.update = function () {
   this.seperation();
   this.cohesion();
   this.align();
+  this.otherCreatures();
   this.render();
 
 };
@@ -79,8 +82,24 @@ Vehicle.prototype.seperation = function() {
   this.applyforce(sum);
 };
 
+Vehicle.prototype.otherCreatures = function () {
+  var sum = new JSVector(0,0);
+  for(let i = 0; i<this.creatures.length;i++){
+    var distanceFromCreature = this.loc.distance(this.creatures[i].loc);
+    if(distanceFromCreature<this.distanceFromSnakes){
+      var desiredVel = JSVector.subGetNew(this.loc,this.creatures[i].loc);
+      desiredVel.normalize();
+      desiredVel.multiply(this.maxSpeed);
+      var desiredacc = JSVector.subGetNew(desiredVel,this.vel);
 
-Vehicle.prototype.cohesion = function () {// not working
+      sum.add(desiredacc);
+    }
+  }
+
+  this.applyforce(sum);
+};
+
+Vehicle.prototype.cohesion = function () {
   var sum = new JSVector(0,0);
   var count = 0;
   for(let i = 0;i<this.otherVehicles.length;i++){
@@ -135,7 +154,7 @@ Vehicle.prototype.align = function () {
 Vehicle.prototype.render = function () {
     ctx.save();
     ctx.strokeStyle = 'rgba(0,0,0, .1)';
-    ctx.fillStyle = "rgba(22, 21, 21, .9)";
+    ctx.fillStyle = "rgba(255, 255, 255, .9)";
     ctx.translate(this.loc.x,this.loc.y);
     ctx.rotate(this.vel.getDirection());
     ctx.beginPath();
