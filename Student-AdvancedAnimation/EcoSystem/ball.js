@@ -13,8 +13,8 @@ Ball.prototype.run = function(){
 }
 
 Ball.prototype.checkEdges = function(){
-  if(this.loc.x > canvas.width || this.loc.x < 0)  this.vel.x = -this.vel.x;
-  if(this.loc.y > canvas.height || this.loc.y < 0)  this.vel.y = -this.vel.y;
+  if(this.loc.x > canvas.width || this.loc.x < 0)  this.vel.x = -this.vel.x;// add radius to location
+  if(this.loc.y > canvas.height || this.loc.y < 0)  this.vel.y = -this.vel.y;//add radius to loction
 }
 
 Ball.prototype.update = function(){
