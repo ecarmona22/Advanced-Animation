@@ -1,6 +1,6 @@
 function Orbitor(otherBall){
   this.otherBall = otherBall;
-  this.radiusOfOrbitor = 15;
+  this.radiusOfOrbitor = 10;
   this.radiusFromBall = new JSVector(70,0);
   this.angularVel = .05;
 
@@ -15,8 +15,8 @@ function Orbitor(otherBall){
   }
   Orbitor.prototype.render = function(){
     var loc  = JSVector.addGetNew(this.radiusFromBall,this.otherBall.loc);
-    ctx.strokeStyle = 'rgba(55,50,220)';
-    ctx.fillStyle = "rgba(255,162,12)";
+    ctx.strokeStyle = 'rgba(0,0,0)';
+    ctx.fillStyle = "rgba(2,54,244)";
     ctx.fill();
     ctx.beginPath();
     ctx.arc(loc.x,loc.y, this.radiusOfOrbitor, Math.PI*2, 0, false);

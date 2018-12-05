@@ -13,8 +13,8 @@ Ball.prototype.run = function(){
 }
 
 Ball.prototype.checkEdges = function(){
-  if(this.loc.x > window.innerWidth || this.loc.x < 0)  this.vel.x = -this.vel.x;
-  if(this.loc.y > window.innerHeight || this.loc.y < 0)  this.vel.y = -this.vel.y;
+  if(this.loc.x > canvas.width || this.loc.x < 0)  this.vel.x = -this.vel.x;
+  if(this.loc.y > canvas.height || this.loc.y < 0)  this.vel.y = -this.vel.y;
 }
 
 Ball.prototype.update = function(){
@@ -28,7 +28,7 @@ Ball.prototype.update = function(){
 
 Ball.prototype.render = function(){
   ctx.strokeStyle = 'rgba(0,0,0, .9)';
-  ctx.fillStyle = "rgba(55,55,0, .9)";
+  ctx.fillStyle = "rgba(4,0,255, .9)";
   ctx.fill();
   ctx.beginPath();
   ctx.arc(this.loc.x,this.loc.y, this.rad, Math.PI*2, 0, false);
