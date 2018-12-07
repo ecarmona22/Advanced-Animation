@@ -12,7 +12,7 @@ function Vehicle(loc,neighbors,otherCreatures){
   this.seperationRadius = 60;
   this.seperationFactor = .05;
   this.cohesionFactor =.02;
-  this.alignmentFactor = .03;
+  this.alignmentFactor = .04;
   this.radiusOfAlAndCo = 210;
 
 }

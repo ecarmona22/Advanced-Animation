@@ -5,9 +5,10 @@ function Creator(){
   this.boid;
   this.boidRadius = 30;
   this.orbitor;
-  this.amountOfVehicles = 50; // amount of vehicles flocking
-  this.amountOfSnakes = 3;// number of snakes
+  this.amountOfVehicles = 100; // amount of vehicles flocking
+  this.amountOfSnakes = 4;// number of snakes
   this.numOfSeg = 8; //number of segments
+
   this.ballCreater= function(){
     var x = Math.random()*canvas.width;
     var y = Math.random()*canvas.height;
@@ -20,6 +21,7 @@ function Creator(){
     var acc = new JSVector(ax,ay);
     this.boid = new Ball(loc,vel,acc,30);
   };
+
   this.makeCreatures();
 
 }
