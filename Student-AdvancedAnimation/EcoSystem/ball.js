@@ -29,8 +29,8 @@ Ball.prototype.update = function(){
 Ball.prototype.render = function(){
   ctx.strokeStyle = 'rgba(0,0,0, .9)';
   ctx.fillStyle = "rgba(4,0,255, .9)";
-  ctx.fill();
   ctx.rect(this.loc.x,this.loc.y, this.rad, this.rad);
   ctx.stroke();
+  ctx.fill();
 
 }

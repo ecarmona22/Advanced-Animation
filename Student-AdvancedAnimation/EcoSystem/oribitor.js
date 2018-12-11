@@ -16,16 +16,16 @@ function Orbitor(otherBall,place){
     this.render();
   }
   Orbitor.prototype.render = function(){
-    var temp = this.otherBall.loc.copy();;
+    var temp = this.otherBall.loc.copy();
     temp.x+= 15;
     temp.y-= 15;
     var loc  = JSVector.addGetNew(this.radiusFromBall,temp);
     ctx.strokeStyle = 'rgba(0,0,0)';
     ctx.fillStyle = "rgba(2,54,244)";
-    ctx.fill();
     ctx.beginPath();
     ctx.arc(loc.x,loc.y, this.radiusOfOrbitor, Math.PI*2, 0, false);
     ctx.stroke();
+    ctx.fill();
 
   }
 }
