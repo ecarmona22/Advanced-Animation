@@ -1,4 +1,4 @@
-function Orbitor(otherBall,place){
+function Orbitor(otherBall){
   this.otherBall = otherBall;
   this.radiusOfOrbitor = 5;
   this.postition = (Math.random()*4)*(Math.PI/2);
