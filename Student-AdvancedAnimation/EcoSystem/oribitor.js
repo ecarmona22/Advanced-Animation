@@ -17,10 +17,10 @@ function Orbitor(otherBall){
     var loc  = JSVector.addGetNew(this.radiusFromBall,this.otherBall.loc);
     ctx.strokeStyle = 'rgba(0,0,0)';
     ctx.fillStyle = "rgba(2,54,244)";
-    ctx.fill();
     ctx.beginPath();
     ctx.arc(loc.x,loc.y, this.radiusOfOrbitor, Math.PI*2, 0, false);
     ctx.stroke();
+    ctx.fill();
 
   }
 }
