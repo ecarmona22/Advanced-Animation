@@ -24,7 +24,7 @@ function Buddies(){
 
 Buddies.prototype.run = function(){
   this.boid.run();
-  // for(let i = 0; i < this.orbitors.length; i++){
-  //   this.orbitors[i].run();
-  // }
+   for(let i = 0; i < this.orbitors.length; i++){
+    this.orbitors[i].run();
+   }
 }

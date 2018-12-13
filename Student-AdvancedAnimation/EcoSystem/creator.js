@@ -3,8 +3,8 @@ function Creator(){
   this.snakes = [];
   this.buddies = [];
   this.amountOfBuddies = 3;
-  this.amountOfVehicles = 3; // amount of vehicles flocking
-  this.amountOfSnakes = 1;// number of snakes
+  this.amountOfVehicles = 75; // amount of vehicles flocking
+  this.amountOfSnakes = 3;// number of snakes
   this.numOfSeg = 8; //number of segments
 
   this.makeCreatures();
