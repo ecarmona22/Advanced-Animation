@@ -10,11 +10,13 @@ function Vehicle(loc,neighbors,otherCreatures){
   this.creatures = otherCreatures;
   this.distanceFromSnakes = 50;
   this.seperationRadius = 60;
-  this.seperationFactor = .04;
+  this.seperationFactor = .05;
   this.cohesionFactor =.02;
   this.alignmentFactor = .04;
   this.radiusOfAlAndCo = 210;
-
+  this.distanceFromCreature;
+  this.colorB = 255;
+  this.colorG = 255;
 }
 
 //function for cohesion (find average location for neighboring vehicles)
@@ -85,8 +87,8 @@ Vehicle.prototype.seperation = function() {
 Vehicle.prototype.otherCreatures = function () {
   var sum = new JSVector(0,0);
   for(let i = 0; i<this.creatures.length;i++){
-    var distanceFromCreature = this.loc.distance(this.creatures[i].loc);
-    if(distanceFromCreature<this.distanceFromSnakes){
+    this.distanceFromCreature = this.loc.distance(this.creatures[i].loc);
+    if(this.distanceFromCreature<this.distanceFromSnakes){
       var desiredVel = JSVector.subGetNew(this.loc,this.creatures[i].loc);
       desiredVel.normalize();
       desiredVel.multiply(this.maxSpeed);
@@ -154,7 +156,11 @@ Vehicle.prototype.align = function () {
 Vehicle.prototype.render = function () {
     ctx.save();
     ctx.strokeStyle = 'rgba(0,0,0, .1)';
-    ctx.fillStyle = "rgba(255, 255, 255, .9)";
+    if(this.distanceFromCreature<= 100){
+      this.colorG-= 2.55;
+      this.colorB-=2.55;
+    }
+    ctx.fillStyle = "rgba(255,"+this.colorG+","+this.colorB+", .9)";
     ctx.translate(this.loc.x,this.loc.y);
     ctx.rotate(this.vel.getDirection());
     ctx.beginPath();
