@@ -30,7 +30,7 @@ Ball.prototype.render = function(){
   ctx.strokeStyle = 'rgba(0,0,0, .9)';
   ctx.fillStyle = "rgba(4,0,255, .9)";
   ctx.beginPath();
-  ctx.arc(this.loc.x,this.loc.y, this.rad, Math.PI*2, 0, false);
+  ctx.rect(this.loc.x,this.loc.y, this.rad, this.rad);
   ctx.stroke();
   ctx.fill();
 
