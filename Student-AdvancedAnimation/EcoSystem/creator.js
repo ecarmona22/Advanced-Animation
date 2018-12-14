@@ -4,7 +4,7 @@ function Creator(){
   this.buddies = [];
   this.amountOfBuddies = 3;
   this.amountOfVehicles = 75; // amount of vehicles flocking
-  this.amountOfSnakes = 3;// number of snakes
+  this.amountOfSnakes = 5;// number of snakes
   this.numOfSeg = 8; //number of segments
 
   this.makeCreatures();
@@ -18,7 +18,7 @@ Creator.prototype.makeCreatures = function () {
   }
 
   for(let i = 0; i< this.amountOfSnakes;i++){
-    this.snakes.push(new Snake(this.numOfSeg)); }
+    this.snakes.push(new Snake(this.numOfSeg,this.snakes)); }
 
   for(let i = 0; i< this.amountOfBuddies;i++){
      this.buddies.push(new Buddies());

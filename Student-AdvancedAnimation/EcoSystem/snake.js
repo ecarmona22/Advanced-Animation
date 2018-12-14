@@ -1,10 +1,11 @@
-function Snake(numOfSeg){
+function Snake(numOfSeg,otherSnakes){
   this.loc = new JSVector( Math.random()*window.innerWidth, Math.random()*window.innerHeight);
   this.vel = new JSVector(Math.random()*4,Math.random()*4);
   this.acc = new JSVector(0.01,-0.01);
   this.accR = Math.random()*300;//variable will create change in acceleration
-
+  this.otherSnakes = otherSnakes;
   this.numOfSeg = numOfSeg;
+
   this.segments = [];// array of segments
   this.distance = 20;
   this.radiusOfSeg = 10;
@@ -21,6 +22,7 @@ function Snake(numOfSeg){
 
 Snake.prototype.run = function () {
   this.checkEdges();
+  this.seperation();
   this.update();
 }
 
@@ -29,6 +31,23 @@ Snake.prototype.checkEdges = function () {
   if(this.loc.y > canvas.height || this.loc.y < 0)  this.vel.y = -this.vel.y;
 }
 
+Snake.prototype.seperation = function () {
+  var sum = new JSVector(0,0);
+  for(let i = 0; i< this.otherSnakes.length;i++){
+    if (this.otherSnakes[i] === this) continue;
+    var distanceFromSnakes = this.loc.distance(this.otherSnakes[i].loc);
+    if(distanceFromSnakes< 150){
+      var desiredVel = JSVector.subGetNew(this.loc,this.otherSnakes[i].loc);
+      desiredVel.normalize();
+      desiredVel.multiply(4);//maxSpeed
+      var desiredAcc = JSVector.subGetNew(desiredVel,this.vel);
+      desiredAcc.normalize();
+      desiredAcc.multiply(.04);
+      sum.add(desiredAcc);
+    }
+  }
+  this.acc.add(sum);
+};
 
 Snake.prototype.update = function () {
   this.accR++;//
@@ -36,11 +55,9 @@ Snake.prototype.update = function () {
     this.acc = this.acc.multiply(-1);
 
   }
-  this.vel.x += this.acc.x;
-  this.vel.y += this.acc.y;
-  this.vel.limit(10);
-  this.loc.x += this.vel.x;
-  this.loc.y += this.vel.y;
+  this.vel.add(this.acc);
+  this.vel.limit(4);
+  this.loc.add(this.vel);
 
   for(let i = 1;i<this.numOfSeg;i++){//gives the rest of segments location based on leader segment
     var temp = JSVector.subGetNew(this.segments[i],this.segments[i-1]);
