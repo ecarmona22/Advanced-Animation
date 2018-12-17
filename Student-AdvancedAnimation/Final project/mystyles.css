@@ -1,0 +1,46 @@
+
+
+body{
+   background-color: #84817d;
+   margin:0;
+ }
+
+#wrapperDiv{
+ background-color: #003129;
+ height: 833px;
+ width: 800px;
+ border: solid black 1px;
+ margin:auto;
+ margin-top: 20px;
+
+}
+
+.slider{
+  width: 25%;
+  display:block;
+}
+
+.slider{
+  -webkit-apperance: none;
+  width:100%;
+  height: 25px;
+  background: #d3d3d3;
+  outline:none;
+  opacity: 0.9*;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb{
+  -webkit-apperance:none;
+  apperance:none;
+  width: 25px;
+  height: 25px;
+  background: #4CAF50;
+  cursor: :pointer;
+
+}
