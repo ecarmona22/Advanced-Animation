@@ -18,7 +18,7 @@ Creator.prototype.makeCreatures = function () {
   }
 
   for(let i = 0; i< this.amountOfSnakes;i++){
-    this.snakes.push(new Snake(this.numOfSeg)); }
+    this.snakes.push(new Snake(this.numOfSeg,this.vehicles)); }
 
   for(let i = 0; i< this.amountOfBuddies;i++){
      this.buddies.push(new Buddies());
