@@ -1,9 +1,19 @@
+<<<<<<< HEAD
 function Snake(numOfSeg,otherSnakes){
+=======
+function Snake(numOfSeg,prey){
+>>>>>>> 5cd06763884b85e818100fe5769db1760c19956e
   this.loc = new JSVector( Math.random()*window.innerWidth, Math.random()*window.innerHeight);
   this.vel = new JSVector(Math.random()*4,Math.random()*4);
   this.acc = new JSVector(0.01,-0.01);
   this.accR = Math.random()*300;//variable will create change in acceleration
+<<<<<<< HEAD
   this.otherSnakes = otherSnakes;
+=======
+  this.prey = prey;
+  this.maxSpeed = 6;
+  this.maxForce = 0.6
+>>>>>>> 5cd06763884b85e818100fe5769db1760c19956e
   this.numOfSeg = numOfSeg;
 
   this.segments = [];// array of segments
@@ -22,7 +32,11 @@ function Snake(numOfSeg,otherSnakes){
 
 Snake.prototype.run = function () {
   this.checkEdges();
+<<<<<<< HEAD
   this.seperation();
+=======
+  this.food();
+>>>>>>> 5cd06763884b85e818100fe5769db1760c19956e
   this.update();
 }
 
@@ -31,6 +45,7 @@ Snake.prototype.checkEdges = function () {
   if(this.loc.y > canvas.height || this.loc.y < 0)  this.vel.y = -this.vel.y;
 }
 
+<<<<<<< HEAD
 Snake.prototype.seperation = function () {
   var sum = new JSVector(0,0);
   for(let i = 0; i< this.otherSnakes.length;i++){
@@ -44,6 +59,19 @@ Snake.prototype.seperation = function () {
       desiredAcc.normalize();
       desiredAcc.multiply(.04);
       sum.add(desiredAcc);
+=======
+Snake.prototype.food = function () {
+  var sum = new JSVector(0,0);
+  for(let i = 0; i < this.prey.length; i++){
+    var distanceFromPrey = this.loc.distance(this.prey[i].loc);
+    if(distanceFromPrey < 45){
+      var desiredVel = JSVector.subGetNew(this.loc,this.prey[i].loc);
+      desiredVel.normalize();
+      desiredVel.multiply(this.maxSpeed);
+      var desiredacc = JSVector.subGetNew(desiredVel,this.vel);
+      desiredacc.limit(this.maxForce);
+      sum.add(desiredacc);
+>>>>>>> 5cd06763884b85e818100fe5769db1760c19956e
     }
   }
   this.acc.add(sum);
@@ -55,9 +83,17 @@ Snake.prototype.update = function () {
     this.acc = this.acc.multiply(-1);
 
   }
+<<<<<<< HEAD
   this.vel.add(this.acc);
   this.vel.limit(4);
   this.loc.add(this.vel);
+=======
+  this.vel.x += this.acc.x;
+  this.vel.y += this.acc.y;
+  this.vel.limit(this.maxSpeed);
+  this.loc.x += this.vel.x;
+  this.loc.y += this.vel.y;
+>>>>>>> 5cd06763884b85e818100fe5769db1760c19956e
 
   for(let i = 1;i<this.numOfSeg;i++){//gives the rest of segments location based on leader segment
     var temp = JSVector.subGetNew(this.segments[i],this.segments[i-1]);

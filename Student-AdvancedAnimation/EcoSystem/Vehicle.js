@@ -87,16 +87,24 @@ Vehicle.prototype.seperation = function() {
 Vehicle.prototype.otherCreatures = function () {
   var sum = new JSVector(0,0);
   for(let i = 0; i<this.creatures.length;i++){
-    this.distanceFromCreature = this.loc.distance(this.creatures[i].loc);
-    if(this.distanceFromCreature<this.distanceFromSnakes){
+    var distanceFromCreature = this.loc.distance(this.creatures[i].loc);
+    if(distanceFromCreature<this.distanceFromSnakes){
       var desiredVel = JSVector.subGetNew(this.loc,this.creatures[i].loc);
       desiredVel.normalize();
       desiredVel.multiply(this.maxSpeed);
       var desiredacc = JSVector.subGetNew(desiredVel,this.vel);
-
       sum.add(desiredacc);
     }
-  }
+    if(distanceFromCreature === 0 && this.creature[i].loc === this.loc){
+      for(let i = 0; i < this.otherVehicles[i].length;i++){
+        if( this.otherVehicles[i] == this ){
+          this.otherVehicles.splice(i,1);
+        }
+      }
+      }
+    }
+
+
 
   this.applyforce(sum);
 };
@@ -156,9 +164,14 @@ Vehicle.prototype.align = function () {
 Vehicle.prototype.render = function () {
     ctx.save();
     ctx.strokeStyle = 'rgba(0,0,0, .1)';
-    if(this.distanceFromCreature<= 100){
-      this.colorG-= 2.55;
-      this.colorB-=2.55;
+    for(let i = 0; i < this.creatures.length;i++){
+      var distanceFromCreature = this.loc.distance(this.creatures[i].loc);
+      if(distanceFromCreature<= 75){
+        this.colorG-= 2.55;
+        this.colorB-=2.55;
+      }
+
+
     }
     ctx.fillStyle = "rgba(255,"+this.colorG+","+this.colorB+", .9)";
     ctx.translate(this.loc.x,this.loc.y);
@@ -170,4 +183,5 @@ Vehicle.prototype.render = function () {
     ctx.closePath();
     ctx.fill();
     ctx.restore();
+
 };
