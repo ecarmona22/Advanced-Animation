@@ -18,14 +18,10 @@ Creator.prototype.makeCreatures = function () {
   }
 
   for(let i = 0; i< this.amountOfSnakes;i++){
-<<<<<<< HEAD
-    this.snakes.push(new Snake(this.numOfSeg,this.snakes)); }
-=======
     this.snakes.push(new Snake(this.numOfSeg,this.vehicles)); }
->>>>>>> 5cd06763884b85e818100fe5769db1760c19956e
 
   for(let i = 0; i< this.amountOfBuddies;i++){
-     this.buddies.push(new Buddies());
+     this.buddies.push(new Buddies(this.snakes));
  }
 
 };
