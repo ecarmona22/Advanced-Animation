@@ -1,23 +1,23 @@
-function Vehicle(loc,neighbors,otherCreatures){
-  this.loc = loc;
-  this.vel = new JSVector(Math.random()*2-1, Math.random()*2-1);
-  this.acc = new JSVector(0,0);
+function Vehicle(loc,neighbors,otherCreatures){// set parameters (location where vehicles is to be rendered, array of vehicles, array of snakes )
+  this.loc = loc;//location vector
+  this.vel = new JSVector(Math.random()*2-1, Math.random()*2-1);//random velocity vector between 2 and 1
+  this.acc = new JSVector(0,0);//accleration vector
   this.steerV;
-  this.maxSpeed =4 // maxSpeedValue;//book = 4
-  this.maxForce = 0.4 //maxForceValue;//book = 0.1
+  this.maxSpeed =4 // maxSpeedValue;//book = 4 // maximum magnitude
+  this.maxForce = 0.4 //maxForceValue;//book = 0.1 //maximum
   //this.radiusOfFreinds = radiusValue;//radius for alignment, cohesion, and sepration
-  this.otherVehicles = neighbors;
-  this.creatures = otherCreatures;
+  this.otherVehicles = neighbors;// array of vehicles
+  this.creatures = otherCreatures;//array of snakes
   this.distanceFromSnakes = 50;
-  this.seperationRadius = 60;
-  this.seperationFactor = .05;
-  this.cohesionFactor =.02;
-  this.alignmentFactor = .04;
-  this.radiusOfAlAndCo = 210;
-  this.distanceFromCreature;
-  this.colorB = 255;
-  this.colorG = 255;
-  this.life = true;
+  this.seperationRadius = 60;//radius of other vehicles for seperation
+  this.seperationFactor = .05;// amount of force to repel from other vehicles
+  this.cohesionFactor =.02;// amount of force to attract to average location of other vehicles
+  this.alignmentFactor = .04;//amount of force to attract to average velocity to other vehicles
+  this.radiusOfAlAndCo = 210;//radius of other vehicles for alignment and cohesion
+  this.distanceFromCreature;//
+  this.colorB = 255;//amount of blue in RGB
+  this.colorG = 255;//amount of Green in RGB
+  this.life = true;//
   this.count= 0;
 }
 
@@ -31,7 +31,7 @@ Vehicle.prototype.run = function () {
   this.checkedges();
 };
 
-Vehicle.prototype.checkedges = function () {
+Vehicle.prototype.checkedges = function () {//checks if vehicles is on canvas, if not will appear on opposite side of canvas
     if(this.loc.x > canvas.width) this.loc.x = 0;
     if(this.loc.x < 0) this.loc.x = canvas.width;
     if(this.loc.y > canvas.height) this.loc.y = 0;
@@ -42,19 +42,19 @@ Vehicle.prototype.checkedges = function () {
 };
 
 Vehicle.prototype.update = function () {
-  this.vel.add(this.acc);
-  this.vel.limit(this.maxSpeed);
-  this.loc.add(this.vel);
-  this.acc.multiply(0);
-  this.seperation();
-  this.cohesion();
-  this.align();
-  this.otherCreatures();
-  this.render();
+  this.vel.add(this.acc);//adds accleration to velocity
+  this.vel.limit(this.maxSpeed);//assures velocity does not excced maximum speed
+  this.loc.add(this.vel);//adds velocity to locaiton
+  this.acc.multiply(0);//resets accleration
+  this.seperation();// causes vehicles to keep a distance from each other
+  this.cohesion();// attracts vehicles to average locaiton of other vehicles
+  this.align();//attracts vehicles to average velocity of other vehicles
+  this.otherCreatures();//causes vehicles to run away from snakes when in certain range
+  this.render();//draws,or renders, vehicle on canvas
 
 };
 
-Vehicle.prototype.applyforce = function (force) {
+Vehicle.prototype.applyforce = function (force) {// applies force to accleration
     this.acc.add(force);
 };
 
@@ -68,22 +68,22 @@ Vehicle.prototype.steer = function (target) {
   return this.steerV;
 }
 
-Vehicle.prototype.seperation = function() {
-  var sum = new JSVector(0,0);
-  for(let i = 0;i<this.otherVehicles.length;i++){//looks for vehicles that are close
-    if(this.otherVehicles[i] === this) continue;
-    var distanceFromNeighbor = this.loc.distance(this.otherVehicles[i].loc);
-    if(distanceFromNeighbor< this.seperationRadius){
-      var desiredVel = JSVector.subGetNew(this.loc,this.otherVehicles[i].loc);
-      desiredVel.normalize();
-      desiredVel.multiply(this.maxSpeed);
-      var desiredacc = JSVector.subGetNew(desiredVel,this.vel);
+Vehicle.prototype.seperation = function() {//causes vehicles to keep a distance from each other
+  var sum = new JSVector(0,0);//local vector to add all vectors too.
+  for(let i = 0;i<this.otherVehicles.length;i++){//runs through array of all vehicles
+    if(this.otherVehicles[i] === this) continue;//if array of vehicles is this vehicle it skips
+    var distanceFromNeighbor = this.loc.distance(this.otherVehicles[i].loc);//calculates distance from this vehicle to other vehicles
+    if(distanceFromNeighbor< this.seperationRadius){//if distance calculated is in range runs through
+      var desiredVel = JSVector.subGetNew(this.loc,this.otherVehicles[i].loc);// subtracts to find distance(vector)
+      desiredVel.normalize();//sets magnitude to 1. more info in jsvector.js
+      desiredVel.multiply(this.maxSpeed);//multiply by maximumspeed
+      var desiredacc = JSVector.subGetNew(desiredVel,this.vel);//subtracts vectors to achieve accleration
       desiredacc.normalize();
-      desiredacc.multiply(this.seperationFactor);//sepValue);//weight factor
-      sum.add(desiredacc);
+      desiredacc.multiply(this.seperationFactor);//sepValue);//multiply by weight factor
+      sum.add(desiredacc);//adds to local vector
     }
   }
-  this.applyforce(sum);
+  this.applyforce(sum);//adds to accleration
 };
 
 Vehicle.prototype.otherCreatures = function () {

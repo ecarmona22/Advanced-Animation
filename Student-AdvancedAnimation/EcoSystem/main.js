@@ -20,7 +20,7 @@ function init(){
   canvas.style.backgroundColor = 'rgba(0, 0, 0)';
   // get the context
   ctx = canvas.getContext('2d'); // This is the context
-  creations = new Creator();
+  creations = new Creator();// class in charge of all creatues
   animate();
 }
 
@@ -28,7 +28,7 @@ function animate(){
 
 
   ctx.clearRect(0,0,canvas.width, canvas.height);
-  creations.run();
+  creations.run();//running of creatues
   requestAnimationFrame(animate);
 
   }
