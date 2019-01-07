@@ -28,7 +28,7 @@ function animate(){
 
 
   ctx.clearRect(0,0,canvas.width, canvas.height);
-  creations.run();//running of creatues
+  creations.run();//running of creatures,find more in doc creature.js
   requestAnimationFrame(animate);
 
   }
