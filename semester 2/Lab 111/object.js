@@ -1,7 +1,7 @@
 function Objects(locX, locY){
 this.locX = locX;
 this.locY = locY;
-this.rad = 45;
+this.rad = 100;
 
 
 }
